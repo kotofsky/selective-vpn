@@ -1,4 +1,4 @@
-# PPTP-Linux for Jackett and Radarr
+# PPTP-Linux for Jackett, Radarr and any torrent client
 [![Docker Pulls](https://img.shields.io/docker/pulls/markinas/pptp-client-iptables)](https://hub.docker.com/repository/docker/markinas/pptp-client-iptables)
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/markinas/pptp-client-iptables/latest)](https://hub.docker.com/repository/docker/markinas/pptp-client-iptables)
 
@@ -35,6 +35,9 @@ $ docker run --privileged  -d \
 |`RADARR_PORT`| Yes | Port that radarr container expose |`RADARR_PORT=7878`|
 |`JACKETT_IP`| Yes | Ip address of your jackett container in custom network |`JACKETT_IP=172.16.240.9`|
 |`JACKETT_PORT`| Yes | Port that jackett container expose |`JACKETT_PORT=9117`|
+|`TORRENT_IP`| Yes | Ip address of your torrent client container in custom network |`TORRENT_IP=172.16.240.11`|
+|`TORRENT_PORT_TCP`| Yes | Port that torrent client container expose |`TORRENT_PORT_TCP=8080`|
+|`TORRENT_PORT_UDP`| Yes | Port that torrent client container expose |`TORRENT_PORT_UDP=6881`|
 |`VPN_SERVER`| Yes | Address of pptp vpn server |`VPN_SERVER=pptpserver.net`|
 |`VPN_USERNAME`| Yes | Username for vpn server |`VPN_USERNAME=username`
 |`VPN_PSWD`| Yes | Password for vpn server |`VPN_PSWD=password`

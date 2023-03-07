@@ -44,6 +44,12 @@ iptables -A PREROUTING -i "$iname" -t mangle -s "${JACKETT_IP}" -j MARK --set-ma
 iptables -A PREROUTING -i "$iname" -t mangle -p udp -s "${JACKETT_IP}" --dport 53 -j MARK --set-mark 5
 iptables -A PREROUTING -i "$iname" -t mangle -p tcp -s "${JACKETT_IP}" --sport "${JACKETT_PORT}" -j MARK --set-mark 5
 
+#torrent client rules
+iptables -A PREROUTING -i "$iname" -t mangle -s "${TORRENT_IP}" -j MARK --set-mark 2
+iptables -A PREROUTING -i "$iname" -t mangle -p udp -s "${TORRENT_IP}" --dport 53 -j MARK --set-mark 5
+iptables -A PREROUTING -i "$iname" -t mangle -p tcp -s "${TORRENT_IP}" --sport "${TORRENT_PORT_TCP}" -j MARK --set-mark 5
+iptables -A PREROUTING -i "$iname" -t mangle -p udp -s "${TORRENT_IP}" --sport "${TORRENT_PORT_UDP}" -j MARK --set-mark 5
+
 ip rule add fwmark 5 table nonvpn.table 
 ip rule add fwmark 2 table vpn.table
 
@@ -65,6 +71,12 @@ iptables -D PREROUTING -i "$iname" -t mangle -p tcp -s "${RADARR_IP}" --sport "$
 iptables -D PREROUTING -i "$iname" -t mangle -s "${JACKETT_IP}" -j MARK --set-mark 2
 iptables -D PREROUTING -i "$iname" -t mangle -p udp -s "${JACKETT_IP}" --dport 53 -j MARK --set-mark 5
 iptables -D PREROUTING -i "$iname" -t mangle -p tcp -s "${JACKETT_IP}" --sport "${JACKETT_PORT}" -j MARK --set-mark 5
+
+#torrent client rules
+iptables -D PREROUTING -i "$iname" -t mangle -s "${TORRENT_IP}" -j MARK --set-mark 2
+iptables -D PREROUTING -i "$iname" -t mangle -p udp -s "${TORRENT_IP}" --dport 53 -j MARK --set-mark 5
+iptables -D PREROUTING -i "$iname" -t mangle -p tcp -s "${TORRENT_IP}" --sport "${TORRENT_PORT_TCP}" -j MARK --set-mark 5
+iptables -D PREROUTING -i "$iname" -t mangle -p udp -s "${TORRENT_IP}" --sport "${TORRENT_PORT_UDP}" -j MARK --set-mark 5
 
 ip rule delete fwmark 5 table nonvpn.table 
 ip rule delete fwmark 2 table vpn.table
